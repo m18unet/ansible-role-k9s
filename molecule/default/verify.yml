@@ -1,0 +1,19 @@
+---
+- name: Verify
+  hosts: all
+  become: false
+  gather_facts: false
+
+  vars_files:
+    - ../../defaults/main.yml
+
+  tasks:
+    - name: Check the k9s version.
+      command: "{{ k9s_bin_path }} version --short"
+      changed_when: false
+      register: k9s_verify_version
+
+    - name: Verify k9s's version is {{ k9s_version }}
+      assert:
+        that:
+          - k9s_version in k9s_verify_version.stdout

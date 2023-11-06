@@ -1,0 +1,17 @@
+---
+- name: Check the presence of the k9s binary.
+  stat:
+    path: "{{ k9s_bin_path }}"
+  register: k9s_check
+
+- name: Check the k9s version.
+  shell: "{{ k9s_bin_path }} version --short"
+  failed_when: false
+  changed_when: false
+  register: k9s_current_version
+
+- name: Install k9s v{{ k9s_version }}
+  include_tasks: install.yml
+  when: >-
+    not k9s_check.stat.exists
+    or k9s_version not in k9s_current_version.stdout

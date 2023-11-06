@@ -1,0 +1,12 @@
+---
+- name: Prepare
+  hosts: all
+  become: false
+  gather_facts: false
+
+  vars:
+    k9s_version: '0.25.21'
+    k9s_arch: x86_64
+
+  roles:
+    - m18unet.k9s
