@@ -19,7 +19,7 @@ None.
 ```yaml
 - hosts: all
   roles:
-    - m18uet.k9s
+    - m18unet.k9s
 ```
 
 ## License
